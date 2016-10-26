@@ -4,9 +4,14 @@
  * Project: unittest-generator,
  * File created by: tom-sapletta-com, on 22.10.2016, 08:46
  */
+
+/**
+ * Class UnittestGenerator
+ *
+ * From Source folder are reading and creating files in new destination as test files based on template
+ */
 class UnittestGenerator
 {
-    public $files = [];
     public $files_excluded = [];
     public $files_done = [];
     public $folders = [];
@@ -38,20 +43,25 @@ class UnittestGenerator
         // find all files
         $this->folderscan($folder_project);
 
+        $file_list = [];
         foreach ($this->folders as $subfolder) {
             $files_prefix = $subfolder;
-            $this->folderscan($folder_project . DIRECTORY_SEPARATOR . $subfolder, $files_prefix);
+            array_push($file_list, $this->folderscan($folder_project . DIRECTORY_SEPARATOR . $subfolder, $files_prefix));
         }
-        $this->create_test_files();
-        $this->create_summary();
+        $this->create_test_files($file_list);
+        $this->create_summary($file_list);
     }
 
     /**
+     * scan folder and put all files to array as result
+     *
      * @param $folder
      * @param string $files_prefix
+     * @return array
      */
     public function folderscan($folder, $files_prefix = '')
     {
+        $files = [];
         if ($handle = opendir($folder)) {
             while (false !== ($entry = readdir($handle))) {
                 $filepath = $folder . DIRECTORY_SEPARATOR . $entry;
@@ -59,13 +69,12 @@ class UnittestGenerator
                     if (is_file($filepath)) {
                         $entry = str_replace('.php', '', $entry);
 
-
                         $needle = ['interface', 'abstract'];
                         $is_find = $this->find_in_file($needle, $filepath);
                         if ($is_find) {
                             $this->files_excluded[] = $files_prefix . $entry;
                         } else {
-                            $this->files[] = $files_prefix . $entry;
+                            $files[] = $files_prefix . $entry;
                         }
                         $this->scanned++;
                     } else {
@@ -75,6 +84,7 @@ class UnittestGenerator
             }
             closedir($handle);
         }
+        return $files;
     }
 
     /**
@@ -107,14 +117,15 @@ class UnittestGenerator
      * @param $classname_test
      * @return string
      */
-    public function template($namespace, $project_author, $date, $classname, $classname_test){
+    public function template($namespace, $project_author, $date, $classname, $classname_test)
+    {
 
         $content = '
 <?php
 
 /**
  * Project: ' . $namespace . ',
- * File created by: '.$project_author.', on '. $date .'
+ * File created by: ' . $project_author . ', on ' . $date . '
  */
 
 require_once __DIR__ . \'../vendor\' . \'/autoload.php\';
@@ -139,13 +150,14 @@ class ' . $classname_test . ' extends TestCase
     }
 
     /**
+     * create test files from list
      *
+     * @param array $file_list
      */
-    public function create_test_files()
+    public function create_test_files(array $file_list)
     {
-
         # create Test file
-        foreach ($this->files as $classname) {
+        foreach ($file_list as $classname) {
             $namespace = '';
             if ($this->namespace_project) {
                 $namespace = $this->namespace_project . "\\" . $classname;
@@ -167,14 +179,19 @@ class ' . $classname_test . ' extends TestCase
         }
     }
 
-    public function create_summary()
+    /**
+     * info about all params
+     *
+     * @param array $files
+     */
+    public function create_summary(array $files)
     {
         echo 'FILE excluded (interface, abstract):' . count($this->files_excluded) . "\n";
         foreach ($this->files_excluded as $filename) {
             echo '-' . $filename . "\n";
         }
         echo 'FILE scanned:' . $this->scanned . "\n";
-        echo 'FILE todo:' . count($this->files) . "\n";
+        echo 'FILE todo:' . count($files) . "\n";
         echo 'FILE existing (not created):' . $this->existing . "\n";
         echo 'FILE TESTS created:' . $this->created . "\n";
         foreach ($this->files_done as $filename) {

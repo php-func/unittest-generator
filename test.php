@@ -4,6 +4,8 @@
  * File created by: tom-sapletta-com, on 22.10.2016, 08:47
  */
 
+require __DIR__ . '/vendor/autoload.php';
+
 $folder_project = 'src';
 $folder_test = 'tests';
 $namespace_project = 'Phunc';

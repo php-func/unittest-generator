@@ -34,10 +34,9 @@ class FilesGenerator
      * scan folder and put all files to array as result
      *
      * @param $folder
-     * @param string $files_prefix
      * @return array
      */
-    public function getFolders($folder, $files_prefix = '')
+    public function getFolders($folder)
     {
         $folders = [];
         if ($handle = opendir($folder)) {

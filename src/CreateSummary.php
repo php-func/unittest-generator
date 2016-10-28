@@ -14,7 +14,7 @@ class CreateSummary
      * @param $namespace_project
      * @param $project_author
      */
-    public function __construct(FilesGenerator $files, $folder_test, $namespace_project, $project_author)
+    public function __construct(FilesGenerator $files, $folder_test, $namespace_project, $project_author, UnittestGenerator $generator)
     {
         echo 'folder_test: ' . $folder_test . "\n";
         echo 'namespace_project: ' . $namespace_project . "\n";
@@ -24,11 +24,12 @@ class CreateSummary
         foreach ($files->files_excluded as $filename) {
             echo '-' . $filename . "\n";
         }
-        echo 'FILE scanned:' . $this->scanned . "\n";
+        echo 'FILE scanned:' . $generator->scanned . "\n";
         echo 'FILE todo:' . count($files->list) . "\n";
-        echo 'FILE existing (not created):' . $this->existing . "\n";
-        echo 'FILE TESTS created:' . count($this->created) . "\n";
-        foreach ($this->created as $filename) {
+        echo 'FILE existing (not created):' . $generator->existing . "\n";
+        echo 'FILE TESTS created:' . count($generator->created) . "\n";
+        echo "\n";
+        foreach ($generator->created as $filename) {
             echo $filename . "\n";
         }
     }

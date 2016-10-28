@@ -33,7 +33,6 @@ class UnittestGenerator
     }
 
 
-
     /**
      * create test files from list
      *
@@ -54,7 +53,7 @@ class UnittestGenerator
             $filetest = $folder_test . DIRECTORY_SEPARATOR . $classname_test . '.php';
 
             // create $content from template
-            $content = (string) new Template($namespace, $project_author, date("Y-m-d H:i:s"), $classname, $classname_test);
+            $content = (string)new Template($namespace, $project_author, date("Y-m-d H:i:s"), $classname, $classname_test);
 
             # if not exist, create it
             if (!is_readable($filetest)) {

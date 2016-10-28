@@ -57,6 +57,6 @@ class ' . $classname_test . ' extends TestCase
      */
     public function __toString()
     {
-        return (string) $this->content;
+        return (string)$this->content;
     }
 }

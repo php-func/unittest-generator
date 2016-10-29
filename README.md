@@ -9,11 +9,6 @@ With UnittestGenerator is possible create some part of file, but not all, beacue
 https://tom.sapletta.com/project/a-tool-to-automatically-generate-phpunit-tests/
 
 ## Example
-```
-$scaninfo = new UnittestGenerator($folder_project, $folder_test, $namespace_project, $project_author);
-```
-
-## Example 
 
 ### Configuration (in test.php)
 ```

@@ -13,7 +13,6 @@
  */
 class UnittestGenerator
 {
-
     public $created = [];
     public $scanned = 0;
     public $existing = 0;
@@ -31,7 +30,6 @@ class UnittestGenerator
         $this->create_test_files($files, $folder_test, $namespace_project, $project_author);
         echo (string) new CreateSummary($files, $folder_test, $namespace_project, $project_author, $this);
     }
-
 
     /**
      * create test files from list
@@ -52,7 +50,7 @@ class UnittestGenerator
             $classname_test = $classname . 'Test';
             $filetest = $folder_test . DIRECTORY_SEPARATOR . $classname_test . '.php';
 
-            // create $content from template
+            # create $content from template
             $content = (string)new Template($namespace, $project_author, date("Y-m-d H:i:s"), $classname, $classname_test);
 
             # if not exist, create it
@@ -64,5 +62,4 @@ class UnittestGenerator
             }
         }
     }
-
 }

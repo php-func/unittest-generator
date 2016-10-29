@@ -10,7 +10,7 @@
  */
 class Template
 {
-    public $content = '';
+    protected $content = '';
 
     /**
      * Template constructor.

@@ -12,7 +12,7 @@
  */
 class FindInContentFile
 {
-    public $value;
+    protected $value;
 
     /**
      * FindInContentFile constructor.

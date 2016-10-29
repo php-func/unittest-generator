@@ -60,6 +60,18 @@ TemplateTest.php
 UnittestGeneratorTest.php
 ```
 
+### Return in console, when test file existing
+```
+folder_test: tests
+namespace_project: Phunc
+project_author: tom-sapletta-com
+FILE excluded:0
+FILE scanned:0
+FILE todo:5
+FILE existing (not created):5
+FILE TESTS created:0
+```
+
 #How it works
 
 configuration data

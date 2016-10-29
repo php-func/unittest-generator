@@ -69,9 +69,7 @@ class FilesGenerator
                 if ($entry != "." && $entry != "..") {
                     if (is_file($filepath)) {
                         $entry = str_replace($extension, '', $entry);
-                        $is_find = new FindInContentFile($needle, $filepath);
-
-                        var_dump($is_find);
+                        $is_find = (string) new FindInContentFile($needle, $filepath);
 
                         if ($is_find) {
                             $this->files_excluded[] = $entry;

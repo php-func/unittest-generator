@@ -6,7 +6,7 @@
  */
 class CreateSummary
 {
-    public $value;
+    protected $value;
 
     /**
      * info about all params

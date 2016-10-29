@@ -69,7 +69,10 @@ class FilesGenerator
                 if ($entry != "." && $entry != "..") {
                     if (is_file($filepath)) {
                         $entry = str_replace($extension, '', $entry);
-                        $is_find = $this->find_in_file($needle, $filepath);
+                        $is_find = new FindInContentFile($needle, $filepath);
+
+                        var_dump($is_find);
+
                         if ($is_find) {
                             $this->files_excluded[] = $entry;
                         } else {
@@ -84,26 +87,5 @@ class FilesGenerator
         return $files;
     }
 
-    /**
-     * @param $needle
-     * @param $filepath
-     * @return mixed
-     */
-    public function find_in_file($needle, $filepath)
-    {
-        if (empty($needle)) {
-            return false;
-        }
-        if (!is_array($needle)) {
-            $needle = [$needle];
-        }
-        foreach ($needle as $val) {
-            $result = (strpos(file_get_contents($filepath), $val) !== false);
 
-            if ($result) {
-                return true;
-            }
-        }
-        return false;
-    }
 }

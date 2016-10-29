@@ -13,6 +13,58 @@ https://tom.sapletta.com/project/a-tool-to-automatically-generate-phpunit-tests/
 $scaninfo = new UnittestGenerator($folder_project, $folder_test, $namespace_project, $project_author);
 ```
 
+## Example 
+
+### Configuration (in test.php)
+```
+$folder_project = 'src';
+$folder_test = 'tests';
+$namespace_project = 'Phunc';
+$project_author = 'tom-sapletta-com';
+
+$needle = ['interface', 'abstract'];
+$files = new FilesGenerator($folder_project, $needle);
+```
+
+### Usage 
+```
+$result = new UnittestGenerator($files, $folder_test, $namespace_project, $project_author);
+```
+
+### Start in Console
+```
+php test.php
+```
+
+### Summary in Console
+```
+folder_test: tests
+namespace_project: Phunc
+project_author: tom-sapletta-com
+FILE excluded:0
+FILE scanned:0
+FILE todo:4
+FILE existing (not created):0
+FILE TESTS created:4
+
++ tests\CreateSummaryTest.php
+
++ tests\FilesGeneratorTest.php
+
++ tests\TemplateTest.php
+
++ tests\UnittestGeneratorTest.php
+
+```
+
+### Result Tests Files
+```
+CreateSummaryTest.php
+FilesGeneratorTest.php
+TemplateTest.php
+UnittestGeneratorTest.php
+```
+
 #How it works
 
 configuration data

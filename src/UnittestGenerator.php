@@ -29,7 +29,7 @@ class UnittestGenerator
     public function __construct(FilesGenerator $files, $folder_test, $namespace_project, $project_author)
     {
         $this->create_test_files($files, $folder_test, $namespace_project, $project_author);
-        new CreateSummary($files, $folder_test, $namespace_project, $project_author, $this);
+        echo (string) new CreateSummary($files, $folder_test, $namespace_project, $project_author, $this);
     }
 
 

@@ -6,6 +6,8 @@
  */
 class CreateSummary
 {
+    public $value;
+
     /**
      * info about all params
      *
@@ -16,22 +18,31 @@ class CreateSummary
      */
     public function __construct(FilesGenerator $files, $folder_test, $namespace_project, $project_author, UnittestGenerator $generator)
     {
-        echo 'folder_test: ' . $folder_test . "\n";
-        echo 'namespace_project: ' . $namespace_project . "\n";
-        echo 'project_author: ' . $project_author . "\n";
+        $value = 'folder_test: ' . $folder_test . "\n";
+        $value .= 'namespace_project: ' . $namespace_project . "\n";
+        $value .= 'project_author: ' . $project_author . "\n";
 
-        echo 'FILE excluded:' . count($files->files_excluded) . "\n";
+        $value .= 'FILE excluded:' . count($files->files_excluded) . "\n";
         foreach ($files->files_excluded as $filename) {
-            echo '-' . $filename . "\n";
+            $value .= '-' . $filename . "\n";
         }
-        echo 'FILE scanned:' . $generator->scanned . "\n";
-        echo 'FILE todo:' . count($files->list) . "\n";
-        echo 'FILE existing (not created):' . $generator->existing . "\n";
-        echo 'FILE TESTS created:' . count($generator->created) . "\n";
-        echo "\n";
+        $value .= 'FILE scanned:' . $generator->scanned . "\n";
+        $value .= 'FILE todo:' . count($files->list) . "\n";
+        $value .= 'FILE existing (not created):' . $generator->existing . "\n";
+        $value .= 'FILE TESTS created:' . count($generator->created) . "\n";
+        $value .= "\n";
         foreach ($generator->created as $filename) {
-            echo $filename . "\n";
+            $value .= $filename . "\n";
         }
+        $this->value = $value;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->value;
     }
 
 }

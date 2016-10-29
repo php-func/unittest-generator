@@ -7,9 +7,7 @@
 class FilesGenerator
 {
     public $folder_project;
-
     public $files_excluded = [];
-    public $folders = [];
     public $list = [];
 
 

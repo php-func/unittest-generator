@@ -31,7 +31,7 @@ $result = new UnittestGenerator($files, $folder_test, $namespace_project, $proje
 php test.php
 ```
 
-### Summary in Console
+### Result in console, Summary
 ```
 folder_test: tests
 namespace_project: Phunc
@@ -60,7 +60,7 @@ TemplateTest.php
 UnittestGeneratorTest.php
 ```
 
-### Return in console, when test file existing
+### Result in console, Summary when test file existing
 ```
 folder_test: tests
 namespace_project: Phunc
